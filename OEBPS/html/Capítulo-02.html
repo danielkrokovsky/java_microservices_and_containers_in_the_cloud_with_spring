@@ -1,0 +1,2548 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
+
+<head>
+  <title>Java Microservices and Containers in the Cloud</title>
+  <link href="../css/springer_epub.css" rel="styleSheet" type="text/css"/>
+</head>
+
+<body>
+
+  <div epub:type="frontmatter">
+
+    <div class="BookFrontmatter">
+
+      <div class="BookTitlePage" epub:type="titlepage">
+
+        <div class="BookAuthorGroup">
+
+          <div class="BookAuthors"><span class="Author"><span class="AuthorName">Binildas A. Christudas</span></span></div>
+
+        </div>
+
+        <div class="MainTitleSection" epub:type="fulltitle">
+
+          <h1 class="BookTitle" epub:type="title" lang="en">Java Microservices and Containers in the Cloud</h1>
+
+          <h2 class="BookSubTitle" epub:type="subtitle" lang="en" role="doc-subtitle">With Spring Boot, Kafka, PostgreSQL, Kubernetes, Helm, Terraform and AWS EKS</h2>
+
+        </div>
+
+        <div class="PublisherLogo">
+
+          <figure class="Figure" id="Figa">
+
+            <div class="MediaObject" id="MO1">
+
+              <img alt="" aria-describedby="d64e13" src="../images/Imagem-177.png" style="width:6.15em"/>
+
+              <div class="TextObject" id="d64e13">
+
+                <p class="Para" id="Par24">The Apress logo.</p>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+        </div>
+
+      </div>
+
+      <div class="CopyrightPage" epub:type="copyright-page">
+
+        <div class="CopyrightPageOriginators">
+
+          <div class="AuthorGroup">
+
+            <div class="Author"><span class="AuthorName">Binildas A. Christudas</span><div class="Affiliation" id="Aff1"><div class="AffiliationText">NBCRA 45, Christbin, Thiruvananthapuram, Kerala, India</div></div></div>
+
+          </div>
+
+        </div>
+
+        <div class="CopyrightPageISBNs"><span class="CopyrightPagePrintISBN">
+				ISBN 979-8-8688-0554-7</span><span class="CopyrightPageElectronicISBN">e-ISBN 979-8-8688-0555-4</span></div>
+
+        <div class="BookDOI"><a href="https://doi.org/10.1007/979-8-8688-0555-4">https://doi.org/10.1007/979-8-8688-0555-4</a></div>
+
+        <div class="CopyrightLine">© Binildas A. Christudas 2024</div>
+
+        <div class="CopyrightStandardText" lang="en">This work is subject to copyright. All rights are solely and exclusively licensed by the Publisher, whether the whole or part of the material is concerned, specifically the rights of translation, reprinting, reuse of illustrations, recitation, broadcasting, reproduction on microfilms or in any other physical way, and transmission or information storage and retrieval, electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter developed.</div>
+
+        <div class="TrademarkQualifierText" lang="en">The use of general descriptive names, registered names, trademarks, service marks, etc. in this publication does not imply, even in the absence of a specific statement, that such names are exempt from the relevant protective laws and regulations and therefore free for general use.</div>
+
+        <div class="ProductLiability" lang="en">The publisher, the authors and the editors are safe to assume that the advice and information in this book are believed to be true and accurate at the date of publication. Neither the publisher nor the authors or the editors give a warranty, expressed or implied, with respect to the material contained herein or for any errors or omissions that may have been made. The publisher remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</div>
+
+        <div class="SpringerReferenceLine" lang="en">
+
+          <p class="SimplePara">This Apress imprint is published by the registered company APress Media, LLC, part of Springer Nature.</p>
+
+          <p class="SimplePara">The registered company address is: 1 New York Plaza, New York, NY 10004, U.S.A.</p>
+
+        </div>
+
+      </div>
+
+      <div class="Dedication" epub:type="dedication" role="doc-dedication">
+
+        <p class="SimplePara"><em class="EmphasisTypeItalic ">To Sowmya Hubert, Ann S. Binil, and Ria S. Binil</em></p>
+
+      </div>
+
+      <div class="Preface" epub:type="preface" role="doc-preface">
+
+        <div class="PrefaceTitle" lang="en">Introduction</div>
+
+        <div class="PrefaceBody">
+
+          <p class="Para" id="Par6">Microservices promise the holy grail: concurrent releases and selective scalability. How can you do that in a cloud-native manner? Can microservices do away with synchronous RPC and adopt asynchronous, message-based interactions? When you do that, how do you guarantee user experience with the same synchronous mode of interaction? In this book, you will learn about these non-trivial patterns and practices, all with production grade example code that you can use as templates to start your own work.</p>
+
+          <p class="Para" id="Par7">With 25 years of experience, I teach you the otherwise hard-to-understand hexagonal and onion architectures and demonstrate them with concrete samples in Spring Boot. If you know enough Java and Spring, you can learn basic to advanced concepts, including replicating instances of the same microservice and correlating request and responses from concurrent users to the same instance, in RPC and in messaging styles. You will learn to do this in standalone Java processes, in Docker containers, in Kubernetes, and in AWS Cloud using the Elastic Kubernetes Service (EKS).</p>
+
+          <div class="Para" id="Par8">What’s inside:<div class="UnorderedList"><ul class="UnorderedListMarkBullet"><li><p class="Para" id="Par9">Build a simple microservice in Spring Boot</p></li><li><p class="Para" id="Par10">Learn about HATEOAS, hexagonal, and onion architectures, with code example</p></li><li><p class="Para" id="Par11">Build multiple microservices interacting over RPC and messaging</p></li><li><p class="Para" id="Par12">Use asynchronous patterns at every tier, yet corelate concurrent user requests to the same instance or to different instances</p></li><li><p class="Para" id="Par13">Learn about CI and CD and Helm packaging, with code examples</p></li><li><p class="Para" id="Par14">Build Docker packages and deploy them to Kubernetes</p></li><li><p class="Para" id="Par15">Deploy microservices to AWS EC2 and EKS</p></li></ul></div></div>
+
+          <p class="Para" id="Par16">Spring Boot helps developers create applications that just run. When minimal configuration is required to create an application, even novice Java developers can do it. There is no reason why this simplicity should constrain developers in addressing complex enterprise requirements, and that is where microservice architecture using Spring Boot helps. In addition to rapidly deploying, patching, or scaling applications, containers provide solutions that can also support agile and DevOps efforts to accelerate development, test, and production cycles. The cloud helps companies scale and adapt at speed, accelerate innovation, and drive business agility, without heavy upfront IT investment. What if you could equip even a novice developer with all that is required to help enterprises do all these? This book just does that, and more.</p>
+
+        </div>
+
+      </div>
+
+      <div class="BookAcknowledgments" epub:type="acknowledgments" role="doc-acknowledgments">
+
+        <div class="BookAcknowledgmentsTitle" lang="en">Acknowledgments</div>
+
+        <div class="BookAcknowledgmentsBody">
+
+          <p class="Para" id="Par17">A big thanks to Apress Media for having trust in me and giving me the opportunity to write this book. Nirmal Selvaraj, Dulcy Nirmala and Divya Modi have been very helpful in making the process seamless.</p>
+
+          <p class="Para" id="Par18">The tech-friendly workplace at IBS Software has been a boon to me. Many thanks to Mr. V. K. Mathews, founder and executive chairman, IBS Group, for providing consistent motivation throughout my career. I also want to thank Mr. Arun Hrishikesan, Senior VP at Innovation Ecosystem, IBS, for his constant motivation and support, especially in providing his broader views on technology areas, which influenced the content and style of this book to a great extent. Thanks also to Christopher Branagan, CTO, IBS, for his many years of mentoring.</p>
+
+          <p class="Para" id="Par19">I also want to thank Arun Prasanth from IBS for discussing aspects of this book with me.</p>
+
+          <p class="Para" id="Par20">Thanks to my wife, Sowmya Hubert, and my daughters, Ann S. Binil and Ria S. Binil, who sacrificed so much. A huge thanks is due to my father, Christudas Y., and my mother, Azhakamma J., for their selfless support, which helped me get where I am today. Also, a note of thanks to my in-laws, Hubert Daniel and Pamala Percis. Finally, thanks to my sister, Dr. Binitha, her husband, Dr. Segin Chandran, and their daughter, Aardra B. S.</p>
+
+        </div>
+
+      </div>
+
+      <div class="Toc" epub:type="toc" id="Toc" role="doc-toc">
+
+        <div class="Headings">
+
+          <div class="Heading">Table of Contents</div>
+
+        </div>
+
+        <div class="TocBody">
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html"><span class="RefSource">Chapter 1:​ Microservices for the Enterprise</span></a></span></span><span class="TocPageNumber">1</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec1"><span class="RefSource">Computing Architecture Paradigms</span></a></span></span><span class="TocPageNumber">2</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec2"><span class="RefSource">Centralized Computing</span></a></span></span><span class="TocPageNumber">2</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec3"><span class="RefSource">Distributed Computing</span></a></span></span><span class="TocPageNumber">4</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec4"><span class="RefSource">Decentralized Computing</span></a></span></span><span class="TocPageNumber">7</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec5"><span class="RefSource">Eventually Consistent Software Systems</span></a></span></span><span class="TocPageNumber">9</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec6"><span class="RefSource">Atomic Consistency</span></a></span></span><span class="TocPageNumber">9</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec7"><span class="RefSource">Eventual Consistency</span></a></span></span><span class="TocPageNumber">11</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec8"><span class="RefSource">Eventually Consistent, Decentralized Systems</span></a></span></span><span class="TocPageNumber">13</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec9"><span class="RefSource">Service Granularity</span></a></span></span><span class="TocPageNumber">15</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec10"><span class="RefSource">Monolith</span></a></span></span><span class="TocPageNumber">15</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec11"><span class="RefSource">Macroservice</span></a></span></span><span class="TocPageNumber">16</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec12"><span class="RefSource">Mini Service</span></a></span></span><span class="TocPageNumber">16</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec13"><span class="RefSource">Microservices</span></a></span></span><span class="TocPageNumber">17</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec14"><span class="RefSource">The Hexagonal Architecture Metaphor</span></a></span></span><span class="TocPageNumber">18</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec15"><span class="RefSource">Layered Architecture</span></a></span></span><span class="TocPageNumber">19</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec16"><span class="RefSource">The Ports and Adapter Architecture</span></a></span></span><span class="TocPageNumber">19</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec17"><span class="RefSource">Hexagonal Architecture</span></a></span></span><span class="TocPageNumber">22</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec18"><span class="RefSource">Microservice Metamodel</span></a></span></span><span class="TocPageNumber">22</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec19"><span class="RefSource">Your First Java Microservice</span></a></span></span><span class="TocPageNumber">25</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec20"><span class="RefSource">Spring Boot</span></a></span></span><span class="TocPageNumber">26</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec21"><span class="RefSource">Design Your First Hexagonal Microservice</span></a></span></span><span class="TocPageNumber">26</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec22"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">28</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec23"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">30</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec24"><span class="RefSource">Build and Run the Code</span></a></span></span><span class="TocPageNumber">35</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec25"><span class="RefSource">Test the Microservice Using UI</span></a></span></span><span class="TocPageNumber">38</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec26"><span class="RefSource">Test the Microservice Using cURL</span></a></span></span><span class="TocPageNumber">43</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-03.html#Sec27"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">43</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html"><span class="RefSource">Chapter 2:​ More Hands-on Microservices</span></a></span></span><span class="TocPageNumber">45</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec1"><span class="RefSource">Microservices Using MongoDB and RestTemplate</span></a></span></span><span class="TocPageNumber">46</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec2"><span class="RefSource">Design the Microservices</span></a></span></span><span class="TocPageNumber">46</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec3"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">47</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec4"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">50</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec5"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">57</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec6"><span class="RefSource">Testing the Microservices</span></a></span></span><span class="TocPageNumber">60</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec7"><span class="RefSource">Microservices Using Spring Cloud</span></a></span></span><span class="TocPageNumber">61</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec8"><span class="RefSource">Design the Microservices</span></a></span></span><span class="TocPageNumber">61</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec9"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">62</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec10"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">65</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec11"><span class="RefSource">Testing the Microservices</span></a></span></span><span class="TocPageNumber">67</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec12"><span class="RefSource">HATEOAS and HAL</span></a></span></span><span class="TocPageNumber">67</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec13"><span class="RefSource">HATEOAS Explained</span></a></span></span><span class="TocPageNumber">68</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec14"><span class="RefSource">HAL Explained</span></a></span></span><span class="TocPageNumber">69</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec15"><span class="RefSource">Microservices Using HATEAOS and HAL</span></a></span></span><span class="TocPageNumber">70</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec16"><span class="RefSource">Design the Microservices</span></a></span></span><span class="TocPageNumber">70</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec17"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">71</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec18"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">72</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec19"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">75</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec20"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">77</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-04.html#Sec21"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">78</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html"><span class="RefSource">Chapter 3:​ Onion and Hexagonal Architecture in Practice</span></a></span></span><span class="TocPageNumber">81</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec1"><span class="RefSource">Microservices Using PostgreSQL and RestTemplate</span></a></span></span><span class="TocPageNumber">82</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec2"><span class="RefSource">Design the Microservice</span></a></span></span><span class="TocPageNumber">82</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec3"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">83</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec4"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">92</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec5"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">95</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec6"><span class="RefSource">Microservices Using MongoDB and CrudRepository</span></a></span></span><span class="TocPageNumber">96</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec7"><span class="RefSource">Hexagonal Architecture Revisited</span></a></span></span><span class="TocPageNumber">97</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec8"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">97</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec9"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">100</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec10"><span class="RefSource">Testing the Microservices</span></a></span></span><span class="TocPageNumber">102</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec11"><span class="RefSource">The Onion Architecture</span></a></span></span><span class="TocPageNumber">104</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec12"><span class="RefSource">Onion Architecture Design</span></a></span></span><span class="TocPageNumber">104</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec13"><span class="RefSource">Onion vs.​ Hexagonal Architecture</span></a></span></span><span class="TocPageNumber">106</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec14"><span class="RefSource">GraphQL</span></a></span></span><span class="TocPageNumber">107</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec15"><span class="RefSource">GraphQL Explained</span></a></span></span><span class="TocPageNumber">107</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec16"><span class="RefSource">Onion Architecture Microservice Example</span></a></span></span><span class="TocPageNumber">108</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec17"><span class="RefSource">Onion Design for the Microservice</span></a></span></span><span class="TocPageNumber">109</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec18"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">110</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec19"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">111</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec20"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">123</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec21"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">125</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-05.html#Sec22"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">132</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html"><span class="RefSource">Chapter 4:​ Message Oriented Microservices</span></a></span></span><span class="TocPageNumber">133</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec1"><span class="RefSource">Characteristics of Microservices</span></a></span></span><span class="TocPageNumber">134</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec2"><span class="RefSource">Microservices Are Autonomous</span></a></span></span><span class="TocPageNumber">134</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec3"><span class="RefSource">Microservices Are Evolutionary</span></a></span></span><span class="TocPageNumber">135</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec4"><span class="RefSource">The Honeycomb Analogy</span></a></span></span><span class="TocPageNumber">137</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec5"><span class="RefSource">Async, Still Request-Reply</span></a></span></span><span class="TocPageNumber">137</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec6"><span class="RefSource">Async Request</span></a></span></span><span class="TocPageNumber">137</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec7"><span class="RefSource">Async Request-Reply</span></a></span></span><span class="TocPageNumber">138</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec8"><span class="RefSource">Sync Over Async Microservices</span></a></span></span><span class="TocPageNumber">140</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec9"><span class="RefSource">Design Microservices Over Async Channel</span></a></span></span><span class="TocPageNumber">140</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec10"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">141</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec11"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">151</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec12"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">153</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec13"><span class="RefSource">SEDA and Microservices</span></a></span></span><span class="TocPageNumber">154</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec14"><span class="RefSource">SEDA Architecture</span></a></span></span><span class="TocPageNumber">154</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec15"><span class="RefSource">Microservices Architecture as a Network of Stages</span></a></span></span><span class="TocPageNumber">156</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec16"><span class="RefSource">Async HTTP on Sync over Async Microservices</span></a></span></span><span class="TocPageNumber">157</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec17"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">157</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec18"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">162</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec19"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">165</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-06.html#Sec20"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">168</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html"><span class="RefSource">Chapter 5:​ Microservices Integration in Practice</span></a></span></span><span class="TocPageNumber">171</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec1"><span class="RefSource">Microservices Scalability in the Cloud</span></a></span></span><span class="TocPageNumber">172</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec2"><span class="RefSource">Vertical Scalability</span></a></span></span><span class="TocPageNumber">172</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec3"><span class="RefSource">Horizontal Scalability</span></a></span></span><span class="TocPageNumber">173</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec4"><span class="RefSource">Microservices Scalability</span></a></span></span><span class="TocPageNumber">173</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec5"><span class="RefSource">Sync over Async Dynamics</span></a></span></span><span class="TocPageNumber">175</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec6"><span class="RefSource">Publisher Subscriber Combinations</span></a></span></span><span class="TocPageNumber">176</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec7"><span class="RefSource">Publisher Subscriber Instance Combinations</span></a></span></span><span class="TocPageNumber">176</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec8"><span class="RefSource">Microservices Sequential Processing</span></a></span></span><span class="TocPageNumber">179</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec9"><span class="RefSource">Design Sequential Processing Microservices</span></a></span></span><span class="TocPageNumber">179</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec10"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">181</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec11"><span class="RefSource">Build and Run the Microservice Sequential Processing</span></a></span></span><span class="TocPageNumber">196</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec12"><span class="RefSource">Testing Sequential Request Processing</span></a></span></span><span class="TocPageNumber">202</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec13"><span class="RefSource">Inspecting the Microservice Partition assignment</span></a></span></span><span class="TocPageNumber">207</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec14"><span class="RefSource">Microservices Parallel Processing</span></a></span></span><span class="TocPageNumber">209</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec15"><span class="RefSource">Design Parallel Processing Microservices</span></a></span></span><span class="TocPageNumber">210</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec16"><span class="RefSource">Parallelism and Thread Safety</span></a></span></span><span class="TocPageNumber">211</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec17"><span class="RefSource">Understanding the Code</span></a></span></span><span class="TocPageNumber">212</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec18"><span class="RefSource">Build and Run the Microservice Parallel Processing</span></a></span></span><span class="TocPageNumber">214</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec19"><span class="RefSource">Testing Parallel Request Processing</span></a></span></span><span class="TocPageNumber">218</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-07.html#Sec20"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">222</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html"><span class="RefSource">Chapter 6:​ Production Grade Message Oriented Microservices</span></a></span></span><span class="TocPageNumber">223</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec1"><span class="RefSource">Inter-Microservices Wire Level Options</span></a></span></span><span class="TocPageNumber">224</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec2"><span class="RefSource">XML-RPC and SOAP</span></a></span></span><span class="TocPageNumber">224</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec3"><span class="RefSource">REST and JSON-RPC</span></a></span></span><span class="TocPageNumber">225</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec4"><span class="RefSource">RPC vs.​ Messaging</span></a></span></span><span class="TocPageNumber">226</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec5"><span class="RefSource">RPC Style Messaging</span></a></span></span><span class="TocPageNumber">226</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec6"><span class="RefSource">HTTP Methods for CRUD on Resources</span></a></span></span><span class="TocPageNumber">227</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec7"><span class="RefSource">CRUD Microservices Over Kafka on MongoDB</span></a></span></span><span class="TocPageNumber">229</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec8"><span class="RefSource">Design CRUD Over Async Channel on MongoDB</span></a></span></span><span class="TocPageNumber">230</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec9"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">231</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec10"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">240</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec11"><span class="RefSource">Testing the Microservices</span></a></span></span><span class="TocPageNumber">246</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec12"><span class="RefSource">CRUD Microservices Over Kafka on PostgreSQL</span></a></span></span><span class="TocPageNumber">248</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec13"><span class="RefSource">Design CRUD Over Async Channel on PostgreSQL</span></a></span></span><span class="TocPageNumber">249</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec14"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">249</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec15"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">250</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec16"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">255</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec17"><span class="RefSource">Aggregating Responses from Multiple Microservices</span></a></span></span><span class="TocPageNumber">258</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec18"><span class="RefSource">Aggregator Integration Pattern</span></a></span></span><span class="TocPageNumber">258</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec19"><span class="RefSource">Design the Microservice Aggregator</span></a></span></span><span class="TocPageNumber">260</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec20"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">261</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec21"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">267</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec22"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">272</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-08.html#Sec23"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">279</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html"><span class="RefSource">Chapter 7:​ Introducing Docker</span></a></span></span><span class="TocPageNumber">281</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec1"><span class="RefSource">Different Types of Virtualization</span></a></span></span><span class="TocPageNumber">282</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec2"><span class="RefSource">Traditional Deployment</span></a></span></span><span class="TocPageNumber">282</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec3"><span class="RefSource">Virtualization</span></a></span></span><span class="TocPageNumber">283</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec4"><span class="RefSource">Containers</span></a></span></span><span class="TocPageNumber">285</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec5"><span class="RefSource">Containers in Detail</span></a></span></span><span class="TocPageNumber">285</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec6"><span class="RefSource">History of Containers</span></a></span></span><span class="TocPageNumber">285</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec7"><span class="RefSource">Container Internals</span></a></span></span><span class="TocPageNumber">286</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec8"><span class="RefSource">Virtualization vs.​ Containerization​</span></a></span></span><span class="TocPageNumber">287</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec9"><span class="RefSource">Docker Concepts</span></a></span></span><span class="TocPageNumber">289</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec10"><span class="RefSource">Layered Filesystems</span></a></span></span><span class="TocPageNumber">289</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec11"><span class="RefSource">Docker Images</span></a></span></span><span class="TocPageNumber">289</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec12"><span class="RefSource">Docker Images vs.​ Containers</span></a></span></span><span class="TocPageNumber">293</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec13"><span class="RefSource">Docker Registry</span></a></span></span><span class="TocPageNumber">297</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec14"><span class="RefSource">Hello World Tomcat in Docker</span></a></span></span><span class="TocPageNumber">299</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec15"><span class="RefSource">Run Tomcat Container</span></a></span></span><span class="TocPageNumber">299</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec16"><span class="RefSource">Build and Run Java App without Java</span></a></span></span><span class="TocPageNumber">307</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec17"><span class="RefSource">Using a Maven Container</span></a></span></span><span class="TocPageNumber">308</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec18"><span class="RefSource">Creating a Maven Archetype</span></a></span></span><span class="TocPageNumber">308</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec19"><span class="RefSource">Build and Package Using Maven Container</span></a></span></span><span class="TocPageNumber">311</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec20"><span class="RefSource">Deploy Webapp Using Maven Container</span></a></span></span><span class="TocPageNumber">314</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec21"><span class="RefSource">Build and Run Java App with Docker Compose</span></a></span></span><span class="TocPageNumber">316</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec22"><span class="RefSource">Using Docker Compose</span></a></span></span><span class="TocPageNumber">317</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec23"><span class="RefSource">Build the First Java Microservice with Docker</span></a></span></span><span class="TocPageNumber">320</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec24"><span class="RefSource">Dockerizing the Microservice Using Jib</span></a></span></span><span class="TocPageNumber">320</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec25"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">321</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec26"><span class="RefSource">Build and Push Images to Docker Hub</span></a></span></span><span class="TocPageNumber">324</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec27"><span class="RefSource">Docker Hub Registry and Repository</span></a></span></span><span class="TocPageNumber">326</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec28"><span class="RefSource">Pull Image and Run Container</span></a></span></span><span class="TocPageNumber">328</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec29"><span class="RefSource">Build a Microservice Using a Dockerfile</span></a></span></span><span class="TocPageNumber">333</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec30"><span class="RefSource">Dockerfiles</span></a></span></span><span class="TocPageNumber">334</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec31"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">334</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec32"><span class="RefSource">Build and Run the Microservice Using a Dockerfile</span></a></span></span><span class="TocPageNumber">336</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-09.html#Sec33"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">343</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html"><span class="RefSource">Chapter 8:​ Microservice Containers</span></a></span></span><span class="TocPageNumber">345</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec1"><span class="RefSource">Container Networking</span></a></span></span><span class="TocPageNumber">346</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec2"><span class="RefSource">Links</span></a></span></span><span class="TocPageNumber">346</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec3"><span class="RefSource">Networks</span></a></span></span><span class="TocPageNumber">347</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec4"><span class="RefSource">Container Logs</span></a></span></span><span class="TocPageNumber">348</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec5"><span class="RefSource">Console Output Logging</span></a></span></span><span class="TocPageNumber">348</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec6"><span class="RefSource">Microservice and MongoDB Containers Using Links</span></a></span></span><span class="TocPageNumber">350</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec7"><span class="RefSource">Designing the Container Topology</span></a></span></span><span class="TocPageNumber">350</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec8"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">353</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec9"><span class="RefSource">Run Containers Using Dockerfiles</span></a></span></span><span class="TocPageNumber">353</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec10"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">358</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec11"><span class="RefSource">Microservice and MongoDB Containers Using a Network</span></a></span></span><span class="TocPageNumber">360</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec12"><span class="RefSource">Designing the Container Topology</span></a></span></span><span class="TocPageNumber">361</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec13"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">361</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec14"><span class="RefSource">Run Containers Using Dockerfiles</span></a></span></span><span class="TocPageNumber">361</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec15"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">367</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec16"><span class="RefSource">Microservice Container with PostgreSQL in Host</span></a></span></span><span class="TocPageNumber">369</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec17"><span class="RefSource">Designing the Container Topology</span></a></span></span><span class="TocPageNumber">369</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec18"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">371</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec19"><span class="RefSource">Container to PostgreSQL in Host Configuration</span></a></span></span><span class="TocPageNumber">371</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec20"><span class="RefSource">Run Containers Using Dockerfiles</span></a></span></span><span class="TocPageNumber">372</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec21"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">376</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec22"><span class="RefSource">Microservice and PostgreSQL in Container</span></a></span></span><span class="TocPageNumber">381</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec23"><span class="RefSource">Designing the Container Topology</span></a></span></span><span class="TocPageNumber">382</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec24"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">383</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec25"><span class="RefSource">Run Containers Using Dockerfiles</span></a></span></span><span class="TocPageNumber">383</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec26"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">388</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec27"><span class="RefSource">Container Storage</span></a></span></span><span class="TocPageNumber">393</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec28"><span class="RefSource">Volumes</span></a></span></span><span class="TocPageNumber">394</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec29"><span class="RefSource">Microservice and MongoDB Containers Using File Mount</span></a></span></span><span class="TocPageNumber">394</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec30"><span class="RefSource">Designing the Container Topology</span></a></span></span><span class="TocPageNumber">395</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec31"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">396</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec32"><span class="RefSource">Run Containers Using Dockerfiles</span></a></span></span><span class="TocPageNumber">397</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec33"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">401</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-10.html#Sec34"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">404</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html"><span class="RefSource">Chapter 9:​ Composing Multi-Service Containers</span></a></span></span><span class="TocPageNumber">405</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec1"><span class="RefSource">Introducing Docker Compose</span></a></span></span><span class="TocPageNumber">406</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec2"><span class="RefSource">Docker Compose YAML</span></a></span></span><span class="TocPageNumber">407</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec3"><span class="RefSource">Docker Compose Use Cases</span></a></span></span><span class="TocPageNumber">408</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec4"><span class="RefSource">Composing Microservice with PostgreSQL Containers</span></a></span></span><span class="TocPageNumber">409</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec5"><span class="RefSource">Composing the Container Topology</span></a></span></span><span class="TocPageNumber">410</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec6"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">411</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec7"><span class="RefSource">Run Containers Using Docker Compose</span></a></span></span><span class="TocPageNumber">416</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec8"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">421</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec9"><span class="RefSource">Composing Microservice with MongoDB Containers</span></a></span></span><span class="TocPageNumber">424</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec10"><span class="RefSource">Composing the Container Topology</span></a></span></span><span class="TocPageNumber">424</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec11"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">425</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec12"><span class="RefSource">Run Containers Using Docker Compose</span></a></span></span><span class="TocPageNumber">427</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec13"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">430</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec14"><span class="RefSource">Composing Microservice with PostgreSQL and Kafka</span></a></span></span><span class="TocPageNumber">432</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec15"><span class="RefSource">Composing the Container Topology</span></a></span></span><span class="TocPageNumber">432</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec16"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">433</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec17"><span class="RefSource">Run Containers Using Docker Compose</span></a></span></span><span class="TocPageNumber">439</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec18"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">444</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec19"><span class="RefSource">Composing Microservices with MongoDB and Kafka</span></a></span></span><span class="TocPageNumber">447</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec20"><span class="RefSource">Composing the Container Topology</span></a></span></span><span class="TocPageNumber">447</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec21"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">448</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec22"><span class="RefSource">Run Containers Using Docker Compose</span></a></span></span><span class="TocPageNumber">449</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec23"><span class="RefSource">Testing the Microservice Containers</span></a></span></span><span class="TocPageNumber">452</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-11.html#Sec24"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">454</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html"><span class="RefSource">Chapter 10:​ Microservices with Kubernetes</span></a></span></span><span class="TocPageNumber">455</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec1"><span class="RefSource">The World of Kubernetes</span></a></span></span><span class="TocPageNumber">456</span></div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec2"><span class="RefSource">Kubernetes Architecture</span></a></span></span><span class="TocPageNumber">457</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec3"><span class="RefSource">The Control Plane</span></a></span></span><span class="TocPageNumber">458</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec4"><span class="RefSource">The Node</span></a></span></span><span class="TocPageNumber">459</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec5"><span class="RefSource">Kubernetes Deployment</span></a></span></span><span class="TocPageNumber">459</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec6"><span class="RefSource">Containers</span></a></span></span><span class="TocPageNumber">460</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec7"><span class="RefSource">Pods</span></a></span></span><span class="TocPageNumber">460</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec8"><span class="RefSource">ReplicaSets</span></a></span></span><span class="TocPageNumber">461</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec9"><span class="RefSource">Deployment</span></a></span></span><span class="TocPageNumber">461</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec10"><span class="RefSource">Accessing Kubernetes Services</span></a></span></span><span class="TocPageNumber">462</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec11"><span class="RefSource">Accessing Kubernetes Deployments</span></a></span></span><span class="TocPageNumber">462</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec12"><span class="RefSource">Kubernetes Service</span></a></span></span><span class="TocPageNumber">463</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec13"><span class="RefSource">Traffic Routing to Kubernetes</span></a></span></span><span class="TocPageNumber">466</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec14"><span class="RefSource">Cluster IP</span></a></span></span><span class="TocPageNumber">466</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec15"><span class="RefSource">NodePorts</span></a></span></span><span class="TocPageNumber">467</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec16"><span class="RefSource">Load Balancer</span></a></span></span><span class="TocPageNumber">469</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec17"><span class="RefSource">Ingress</span></a></span></span><span class="TocPageNumber">470</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec18"><span class="RefSource">State Management</span></a></span></span><span class="TocPageNumber">472</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec19"><span class="RefSource">Scale Out vs.​ State Management</span></a></span></span><span class="TocPageNumber">472</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec20"><span class="RefSource">StatefulSets</span></a></span></span><span class="TocPageNumber">473</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec21"><span class="RefSource">Persistent Volume Claim</span></a></span></span><span class="TocPageNumber">475</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec22"><span class="RefSource">Persistent Volume</span></a></span></span><span class="TocPageNumber">475</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec23"><span class="RefSource">Kubernetes Clusters</span></a></span></span><span class="TocPageNumber">476</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec24"><span class="RefSource">Minikube</span></a></span></span><span class="TocPageNumber">476</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec25"><span class="RefSource">Microservices and MongoDB in Kubernetes</span></a></span></span><span class="TocPageNumber">476</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec26"><span class="RefSource">Design Microservices Deployment Topology</span></a></span></span><span class="TocPageNumber">477</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec27"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">478</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec28"><span class="RefSource">Run Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">489</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec29"><span class="RefSource">Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">499</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec30"><span class="RefSource">Accessing Kubernetes Deployments</span></a></span></span><span class="TocPageNumber">500</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec31"><span class="RefSource">Microservices and PostgreSQL in Kubernetes</span></a></span></span><span class="TocPageNumber">507</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec32"><span class="RefSource">Design Microservices Deployment Topology</span></a></span></span><span class="TocPageNumber">507</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec33"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">508</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec34"><span class="RefSource">Run Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">514</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec35"><span class="RefSource">Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">516</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec36"><span class="RefSource">Resiliency of Kubernetes Pods</span></a></span></span><span class="TocPageNumber">519</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec37"><span class="RefSource">State Retention</span></a></span></span><span class="TocPageNumber">519</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-12.html#Sec38"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">523</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html"><span class="RefSource">Chapter 11:​ Message Oriented Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">525</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec1"><span class="RefSource">Microservices Over Kafka with PostgreSQL in k8s</span></a></span></span><span class="TocPageNumber">526</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec2"><span class="RefSource">Design the Microservices Orchestration Topology</span></a></span></span><span class="TocPageNumber">526</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec3"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">527</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec4"><span class="RefSource">Run Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">534</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec5"><span class="RefSource">Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">537</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec6"><span class="RefSource">Load Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">541</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec7"><span class="RefSource">Microservices Over Kafka with MongoDB in k8s</span></a></span></span><span class="TocPageNumber">544</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec8"><span class="RefSource">Design the Microservices Orchestration Topology</span></a></span></span><span class="TocPageNumber">544</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec9"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">545</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec10"><span class="RefSource">Run Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">547</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec11"><span class="RefSource">Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">549</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec12"><span class="RefSource">Load Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">549</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec13"><span class="RefSource">Connect to the MongoDB Pod Using kubectl</span></a></span></span><span class="TocPageNumber">550</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec14"><span class="RefSource">Ingress Routing of Microservices</span></a></span></span><span class="TocPageNumber">553</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec15"><span class="RefSource">Design Ingress Routing Topology</span></a></span></span><span class="TocPageNumber">554</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec16"><span class="RefSource">Environment Configurations</span></a></span></span><span class="TocPageNumber">554</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec17"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">556</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec18"><span class="RefSource">Run Ingress and Microservices in Kubernetes</span></a></span></span><span class="TocPageNumber">561</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec19"><span class="RefSource">Describing Ingress</span></a></span></span><span class="TocPageNumber">563</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec20"><span class="RefSource">Testing the Microservice Pods</span></a></span></span><span class="TocPageNumber">564</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-13.html#Sec21"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">569</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html"><span class="RefSource">Chapter 12:​ Automating Kubernetes Deployment and Helm</span></a></span></span><span class="TocPageNumber">571</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec1"><span class="RefSource">Introducing a Simple Java Microservice</span></a></span></span><span class="TocPageNumber">572</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec2"><span class="RefSource">Designing Your Simple Microservices</span></a></span></span><span class="TocPageNumber">572</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec3"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">573</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec4"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">574</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec5"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">575</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec6"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">577</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec7"><span class="RefSource">Automating the Docker Build</span></a></span></span><span class="TocPageNumber">577</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec8"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">577</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec9"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">579</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec10"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">585</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec11"><span class="RefSource">Automating Docker Push</span></a></span></span><span class="TocPageNumber">586</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec12"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">586</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec13"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">588</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec14"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">591</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec15"><span class="RefSource">Automating Kubernetes Deployment</span></a></span></span><span class="TocPageNumber">591</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec16"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">591</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec17"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">593</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec18"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">594</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec19"><span class="RefSource">Helm</span></a></span></span><span class="TocPageNumber">594</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec20"><span class="RefSource">What Is Helm?​</span></a></span></span><span class="TocPageNumber">595</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec21"><span class="RefSource">Helm Nomenclature</span></a></span></span><span class="TocPageNumber">595</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec22"><span class="RefSource">Client-Server Helm Architecture</span></a></span></span><span class="TocPageNumber">596</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec23"><span class="RefSource">How Helm Works</span></a></span></span><span class="TocPageNumber">597</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec24"><span class="RefSource">Helm Package Microservice</span></a></span></span><span class="TocPageNumber">599</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec25"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">599</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec26"><span class="RefSource">Creating Your First Helm Chart</span></a></span></span><span class="TocPageNumber">600</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec27"><span class="RefSource">Confirming Helm Chart Accuracy</span></a></span></span><span class="TocPageNumber">603</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec28"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">605</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec29"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">608</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec30"><span class="RefSource">Helm Release Upgrades</span></a></span></span><span class="TocPageNumber">609</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec31"><span class="RefSource">Helm Release Rollback</span></a></span></span><span class="TocPageNumber">612</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec32"><span class="RefSource">Helm-Packaging Multi-Microservices</span></a></span></span><span class="TocPageNumber">614</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec33"><span class="RefSource">Designing Helm-Based Deployment Topology</span></a></span></span><span class="TocPageNumber">615</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec34"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">615</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec35"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">619</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec39"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">627</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec40"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">629</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec41"><span class="RefSource">Helmfile Packaging Multi-Microservices</span></a></span></span><span class="TocPageNumber">631</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec42"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">632</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec43"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">634</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec44"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">637</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec45"><span class="RefSource">Testing the Microservice</span></a></span></span><span class="TocPageNumber">640</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-14.html#Sec46"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">641</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html"><span class="RefSource">Chapter 13:​ CI/​CD for Microservice Containers</span></a></span></span><span class="TocPageNumber">643</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec1"><span class="RefSource">CI and CD</span></a></span></span><span class="TocPageNumber">644</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec2"><span class="RefSource">DevOps</span></a></span></span><span class="TocPageNumber">644</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec3"><span class="RefSource">Continuous Integration (CI)</span></a></span></span><span class="TocPageNumber">645</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec4"><span class="RefSource">Continuous Delivery (CD)</span></a></span></span><span class="TocPageNumber">646</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec5"><span class="RefSource">Continuous Deployment (CD)</span></a></span></span><span class="TocPageNumber">646</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec6"><span class="RefSource">Google Skaffold</span></a></span></span><span class="TocPageNumber">646</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec7"><span class="RefSource">Skaffold Workflow</span></a></span></span><span class="TocPageNumber">647</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec8"><span class="RefSource">CI and CD Example for Microservices</span></a></span></span><span class="TocPageNumber">648</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec9"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">648</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec10"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">649</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec11"><span class="RefSource">Build and Run the Microservice</span></a></span></span><span class="TocPageNumber">653</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec12"><span class="RefSource">Testing the Microservices</span></a></span></span><span class="TocPageNumber">655</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-15.html#Sec13"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">659</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html"><span class="RefSource">Chapter 14:​ Microservices in AWS Elastic Compute Cloud</span></a></span></span><span class="TocPageNumber">661</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec1"><span class="RefSource">Cloud Computing</span></a></span></span><span class="TocPageNumber">662</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec2"><span class="RefSource">Public Clouds</span></a></span></span><span class="TocPageNumber">662</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec3"><span class="RefSource">Cloud Deployment Models</span></a></span></span><span class="TocPageNumber">664</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec8"><span class="RefSource">Distributed Computing</span></a></span></span><span class="TocPageNumber">665</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec9"><span class="RefSource">Amazon Web Services (AWS)</span></a></span></span><span class="TocPageNumber">667</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec10"><span class="RefSource">VPC</span></a></span></span><span class="TocPageNumber">668</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec11"><span class="RefSource">Subnet</span></a></span></span><span class="TocPageNumber">668</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec12"><span class="RefSource">Public Proxy Subnet</span></a></span></span><span class="TocPageNumber">669</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec13"><span class="RefSource">NAT Gateway</span></a></span></span><span class="TocPageNumber">669</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec14"><span class="RefSource">EC2</span></a></span></span><span class="TocPageNumber">670</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec15"><span class="RefSource">Route Tables</span></a></span></span><span class="TocPageNumber">670</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec16"><span class="RefSource">Internet Gateway</span></a></span></span><span class="TocPageNumber">670</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec17"><span class="RefSource">Infrastructure as Code (IaC)</span></a></span></span><span class="TocPageNumber">671</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec18"><span class="RefSource">Terraform</span></a></span></span><span class="TocPageNumber">672</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec19"><span class="RefSource">Setting Up AWS EC2 Using Terraform</span></a></span></span><span class="TocPageNumber">673</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec20"><span class="RefSource">Design a Mini Data Center in the Cloud</span></a></span></span><span class="TocPageNumber">673</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec21"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">674</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec22"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">675</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec23"><span class="RefSource">Build and Spin EC2 Server in the Cloud</span></a></span></span><span class="TocPageNumber">683</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec24"><span class="RefSource">Accessing Your EC2 in AWS Cloud Using SSH</span></a></span></span><span class="TocPageNumber">686</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec25"><span class="RefSource">Installing JRE in AWS EC2</span></a></span></span><span class="TocPageNumber">687</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec26"><span class="RefSource">Deploying Microservice in AWS EC2</span></a></span></span><span class="TocPageNumber">688</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec27"><span class="RefSource">Copy the Microservice Executable to the Cloud</span></a></span></span><span class="TocPageNumber">689</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec28"><span class="RefSource">Run the Microservice</span></a></span></span><span class="TocPageNumber">689</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec29"><span class="RefSource">Test the Microservice Using UI</span></a></span></span><span class="TocPageNumber">691</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-16.html#Sec30"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">692</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocChapter">
+
+            <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html"><span class="RefSource">Chapter 15:​ Microservices in AWS Elastic Kubernetes Service</span></a></span></span><span class="TocPageNumber">693</span></div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec1"><span class="RefSource">The Amazon Elastic Kubernetes Service</span></a></span></span><span class="TocPageNumber">694</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec2"><span class="RefSource">EKS Control Plane</span></a></span></span><span class="TocPageNumber">694</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec3"><span class="RefSource">EKS Worker Nodes</span></a></span></span><span class="TocPageNumber">694</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec4"><span class="RefSource">Setting Up AWS EKS Using Terraform</span></a></span></span><span class="TocPageNumber">695</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec5"><span class="RefSource">Designing an EKS Topology in an AWS Cloud</span></a></span></span><span class="TocPageNumber">695</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec6"><span class="RefSource">Code Organization</span></a></span></span><span class="TocPageNumber">697</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec7"><span class="RefSource">Understanding the Source Code</span></a></span></span><span class="TocPageNumber">697</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec8"><span class="RefSource">Setups Required to Operate an EKS Cluster</span></a></span></span><span class="TocPageNumber">708</span></div>
+
+              </div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec9"><span class="RefSource">Build and Spin Your EKS Cluster in AWS</span></a></span></span><span class="TocPageNumber">708</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec10"><span class="RefSource">Deploying Containers in AWS EKS</span></a></span></span><span class="TocPageNumber">710</span></div>
+
+              <div class="TocSection2">
+
+                <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec11"><span class="RefSource">Testing the Microservice in EKS</span></a></span></span><span class="TocPageNumber">713</span></div>
+
+              </div>
+
+            </div>
+
+            <div class="TocSection1">
+
+              <div class="TocEntry"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-17.html#Sec12"><span class="RefSource">Summary</span></a></span></span><span class="TocPageNumber">715</span></div>
+
+            </div>
+
+          </div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App1"><span class="RefSource">Appendix A:​ Using cURL and Postman</span></a></span></span><span class="TocPageNumber">717</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App2"><span class="RefSource">Appendix B:​ Using MongoDB</span></a></span></span><span class="TocPageNumber">727</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App3"><span class="RefSource">Appendix C:​ Using PostgreSQL</span></a></span></span><span class="TocPageNumber">741</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App4"><span class="RefSource">Appendix D:​ Using Kafka</span></a></span></span><span class="TocPageNumber">777</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App5"><span class="RefSource">Appendix E:​ Container Tools</span></a></span></span><span class="TocPageNumber">785</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#App6"><span class="RefSource">Appendix F:​ Cloud Tools</span></a></span></span><span class="TocPageNumber">813</span></div>
+
+          <div class="TocBack"><span class="TocItem"><span class="ExternalRef"><a href="Capítulo-18.html#Ind1"><span class="RefSource">Index</span></a></span></span><span class="TocPageNumber">823</span></div>
+
+        </div>
+
+      </div>
+
+      <div class="Loc LocWithoutHeading" epub:type="contributors">
+
+        <div class="LocBody">
+
+          <div class="LocDiv">
+
+            <div class="Headings">
+
+              <div class="Heading">About the Author</div>
+
+            </div>
+
+            <div class="AuthorGroup"><span class="Author"><span class="AuthorName">Binildas A. Christudas</span></span><div class="Biography"><div class="BiographyFigure"><figure class="Figure" id="Figb"><div class="MediaObject" id="MO2"><img alt="" aria-describedby="d64e2559" src="../images/Imagem-178.jpg" style="width:12.5em"/><div class="TextObject" id="d64e2559"><p class="Para" id="Par25">A photo of Binildas A. Christudas.</p></div></div></figure></div><div class="Para" id="Par21">is an experienced architect and developer, specializing in building distributed software solutions for the airlines, hospitality, and telecommunications domains since the inception of Java. He currently heads technology services as a vice president at IBS Software, a leader in the airline cargo software domain. Binildas is engaged in architecting highly resilient and highly available software solutions for some of the world’s largest cruise and airline companies. He specializes in ensuring data consistency across distributed and decentralized systems, encompassing various scenarios such as cross-region deployments across major public clouds.</div><p class="Para" id="Par22">Binildas is a mechanical engineer from the College of Engineering, Trivandrum (CET) with a post-graduate degree in systems from the Institute of Management Kerala (IMK). Leveraging over 25 years of experience in distributed systems, he currently dedicates his focus to architecting conflict-free, replicated, and eventually consistent systems that handle streaming data and big data. He is the author of Practical Microservices Architectural Patterns by Apress and Service Oriented Java Business Integration by Packt. Binildas was the captain of the Kerala University power lifting team and was the national champion during his studies. He has also been awarded a patent for “A Method and a System for Facilitating Multitenancy of Services” by the USPTO. Binil can be contacted through <span class="ExternalRef"><a href="http://www.linkedin.com/in/binildasca/"><span class="RefSource">www.​linkedin.​com/​in/​binildasca/​</span></a></span>.</p></div><div class="ClearBoth"> </div></div>
+
+          </div>
+
+          <div class="LocDiv">
+
+            <div class="Headings">
+
+              <div class="Heading">About the Technical Reviewer</div>
+
+            </div>
+
+            <div class="AuthorGroup"><span class="Author"><span class="AuthorName">Yogesh Sharma</span></span><div class="Biography"><div class="BiographyFigure"><figure class="Figure" id="Figc"><div class="MediaObject" id="MO3"><img alt="" aria-describedby="d64e2586" src="../images/Imagem-179.jpg" style="width:12.5em"/><div class="TextObject" id="d64e2586"><p class="Para" id="Par26">A photograph of Yogesh Sharma.</p></div></div></figure></div><div class="Para" id="Par23">is a dynamic software developer based in Pune, India, currently honing his skills at Nice Actimize. With a keen interest in complex event processing (CEP), low-code/no-code (LCNC) programming, and progressive application development, Yogesh is always eager to experiment with cutting-edge technologies and innovative solutions. Outside of work, he is a devoted father, spending quality time with his son. Together, they explore the exciting worlds of DIY rocketry and rollerblading, fostering creativity and a love for learning.</div></div><div class="ClearBoth"> </div></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
